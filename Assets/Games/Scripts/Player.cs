@@ -23,7 +23,6 @@ public class Player : AbstractEntity, IPlayer
 
     //-----------------Class---------------------
     protected Animator animator; 
-    protected IWeapon weapon;
 
     protected Vector3 MoveVector { get { return new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")); } }
     protected bool IsRunAnim { set { animator.SetBool("IsRun", value); } }
