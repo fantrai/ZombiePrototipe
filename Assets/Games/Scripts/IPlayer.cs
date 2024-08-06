@@ -5,4 +5,6 @@ using UnityEngine;
 public interface IPlayer : IEntity
 {
     public Vector3 Position { get; }
+
+    public void AddWeapon(IWeapon weapon);
 }

@@ -8,10 +8,12 @@ public class GameSceneInstaller : MonoInstaller
     [SerializeField] GameObject startPlayerPos;
     [SerializeField] Player playerPrefab;
     [SerializeField] EnemySpawner spawner;
+    [SerializeField] AbstractWeapon baseWeaponPlayerPrefab;
 
     public override void InstallBindings()
     {
         var player = Container.InstantiatePrefabForComponent<IPlayer>(playerPrefab, startPlayerPos.transform.position, playerPrefab.transform.rotation, null);
         Container.Bind<IPlayer>().FromInstance(player).AsSingle().NonLazy();
+        player.AddWeapon(baseWeaponPlayerPrefab);
     }
 }

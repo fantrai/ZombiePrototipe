@@ -484,7 +484,7 @@ MonoBehaviour:
   startPlayerPos: {fileID: 1281070509}
   playerPrefab: {fileID: 825155539743751257, guid: a0f2a7c8c2419b14fb4820f174e14fcd, type: 3}
   spawner: {fileID: 1813805233}
-  startPlayerWeaponPrefab: {fileID: 829075473396847996, guid: 9da872ed941885c4cb9091ceb5801d8b, type: 3}
+  baseWeaponPlayerPrefab: {fileID: 4317399011311374696, guid: 5195bf6da57ccd34c92ded32a649db8f, type: 3}
 --- !u!114 &663625565
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 using Zenject;
 
 public class Player : AbstractEntity, IPlayer
@@ -21,8 +23,14 @@ public class Player : AbstractEntity, IPlayer
         }
     }
 
+    public void AddWeapon(IWeapon weapon)
+    {
+        weapons.Push(weapon.Create(transform));
+    }
+
     //-----------------Class---------------------
     protected Animator animator; 
+    protected Stack<IWeapon> weapons = new Stack<IWeapon>();
 
     protected Vector3 MoveVector { get { return new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")); } }
     protected bool IsRunAnim { set { animator.SetBool("IsRun", value); } }
@@ -68,5 +76,6 @@ public class Player : AbstractEntity, IPlayer
     protected void Attack()
     {
         IsAttack = true;
+        if (weapons.Count > 0) weapons.Peek().Fire();
     }
 }

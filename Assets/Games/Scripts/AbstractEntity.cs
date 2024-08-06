@@ -24,13 +24,17 @@ public abstract class AbstractEntity : MonoBehaviour, IEntity
     [SerializeField, Min(0)] protected int hp;
     [SerializeField, Min(0)] protected float speed;
 
+    bool IsLive = true;
+
     protected virtual void FixedUpdate()
     {
-        Move();
+        if (IsLive) Move();
     }
 
     protected virtual void Dead()
     {
+        IsLive = false;
+        gameObject.layer = 9;
         StartCoroutine(DestroyTimer());
     }
 
