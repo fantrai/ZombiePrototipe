@@ -1088,6 +1088,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 3
   speed: 0.05
+  takeDamageParticle: {fileID: 19800000, guid: bc98890f6028f444eaa7789bde5e2eeb, type: 3}
+  onDeadParticle: {fileID: 19800006, guid: 2a474af3f4c27be4e9bdce39cfe4315d, type: 3}
 --- !u!1 &3441967394684388929
 GameObject:
   m_ObjectHideFlags: 0

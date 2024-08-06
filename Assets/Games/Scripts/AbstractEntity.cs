@@ -10,11 +10,15 @@ public abstract class AbstractEntity : MonoBehaviour, IEntity
     //----------------Realizations---------------
     public int HP => hp;
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
-        hp -= damage;
-        if (hp < 0)
-            Dead();
+        if (IsLive) 
+        {
+            hp -= damage;
+            Instantiate(takeDamageParticle, transform.position, transform.rotation);
+            if (hp < 0)
+                Dead();
+        }
     }
 
     //---------------Abstraction-----------------
@@ -23,6 +27,7 @@ public abstract class AbstractEntity : MonoBehaviour, IEntity
     //---------------Class-----------------------
     [SerializeField, Min(0)] protected int hp;
     [SerializeField, Min(0)] protected float speed;
+    [SerializeField] ParticleSystem takeDamageParticle;
 
     bool IsLive = true;
 
@@ -41,6 +46,11 @@ public abstract class AbstractEntity : MonoBehaviour, IEntity
     IEnumerator DestroyTimer()
     {
         yield return new WaitForSeconds(TIME_LIVE_CORPSES);
+        do
+        {
+            transform.Translate(Vector3.down * speed * 0.5f);
+            yield return new WaitForFixedUpdate();
+        } while (transform.position.y > -2);
         Destroy(gameObject);
     }
 }
