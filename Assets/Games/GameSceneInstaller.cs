@@ -7,7 +7,7 @@ public class GameSceneInstaller : MonoInstaller
 {
     [SerializeField] GameObject startPlayerPos;
     [SerializeField] Player playerPrefab;
-    [SerializeField] Camera sceneCamera;
+    [SerializeField] EnemySpawner spawner;
 
     public override void InstallBindings()
     {

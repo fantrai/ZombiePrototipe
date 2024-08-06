@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class Player : AbstractEntity, IPlayer
 {
@@ -11,9 +12,7 @@ public class Player : AbstractEntity, IPlayer
     {
         if (MoveVector != Vector3.zero)
         {
-            float modSpeed = 1f;
-            if (Mathf.Abs(MoveVector.x) > 0.5 && Mathf.Abs(MoveVector.z) > 0.5) modSpeed = 0.6f;
-            transform.Translate(MoveVector * speed * modSpeed, Space.World);
+            transform.Translate(MoveVector * speed, Space.World);
             IsRunAnim = true;
         }
         else
@@ -23,9 +22,12 @@ public class Player : AbstractEntity, IPlayer
     }
 
     //-----------------Class---------------------
-    Animator animator; 
+    protected Animator animator; 
+    protected IWeapon weapon;
+
     protected Vector3 MoveVector { get { return new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")); } }
     protected bool IsRunAnim { set { animator.SetBool("IsRun", value); } }
+    protected bool IsAttack { set { animator.SetBool("IsAttack", value); } }
 
     private void Start()
     {
@@ -38,9 +40,21 @@ public class Player : AbstractEntity, IPlayer
         LookOnTarget();
     }
 
+    protected void Update()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            Attack();
+        }
+        else
+        {
+            IsAttack = false;
+        }
+    }
+
     void LookOnTarget()
     {
-        var mousePos = transform.position;
+        var mousePos = Vector3.zero;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
@@ -50,5 +64,10 @@ public class Player : AbstractEntity, IPlayer
         Vector3 deltaPos = mousePos - transform.position;
         float angle = Mathf.Atan2(deltaPos.x, deltaPos.z) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, angle, 0);
+    }
+
+    protected void Attack()
+    {
+        IsAttack = true;
     }
 }
