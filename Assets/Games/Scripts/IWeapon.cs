@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IWeapon
 {
-    public void Fire();
+    public Transform Transform { get; }
 
-    public IWeapon Create(Transform transform);
+    public void Fire();
 }

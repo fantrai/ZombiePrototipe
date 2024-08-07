@@ -16,7 +16,7 @@ public abstract class AbstractEntity : MonoBehaviour, IEntity
         {
             hp -= damage;
             Instantiate(takeDamageParticle, transform.position, transform.rotation);
-            if (hp < 0)
+            if (hp <= 0)
                 Dead();
         }
     }

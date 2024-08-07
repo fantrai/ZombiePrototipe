@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc08d17a0eed1448b9d22703a7b227d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
+  damage: 1
   distance: 10
   piercing: 1
   cooldownAttack: 0.2
+  shoot: {fileID: 8300000, guid: 6d6d90322a4cb02458e1d7b9968f6c8a, type: 3}

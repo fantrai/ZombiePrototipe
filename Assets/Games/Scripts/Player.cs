@@ -23,12 +23,15 @@ public class Player : AbstractEntity, IPlayer
         }
     }
 
-    public void AddWeapon(IWeapon weapon)
+    public void AddWeapon(IWeapon weaponPrefab)
     {
-        weapons.Push(weapon.Create(transform));
+        var weapon = container.InstantiatePrefab(weaponPrefab.Transform, transform.position + Vector3.up, transform.rotation, transform).GetComponent<IWeapon>();
+        weapons.Push(weapon);
     }
 
     //-----------------Class---------------------
+    [Inject] DiContainer container;
+
     protected Animator animator; 
     protected Stack<IWeapon> weapons = new Stack<IWeapon>();
 
